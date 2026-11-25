@@ -330,6 +330,11 @@ async function callWithFallback(baseRequest, models, enableThinking, clientReaso
       if (status === 429) {
         setCooldown(model, RATE_LIMIT_COOLDOWN_MS);
       }
+
+      // 410: Unavailable model - recurrent with NIM's deprecated model list. Watch mapping
+      if (status === 410) { 
+        setCooldown(model, ACCESS_DENIED_COOLDOWN_MS); 
+      }
     }
   }
 
